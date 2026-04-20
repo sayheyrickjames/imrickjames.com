@@ -1,0 +1,74 @@
+.terminal-shell {
+  width: min(1080px, calc(100vw - 24vw));
+  max-width: 1080px;
+  min-width: 540px;
+  height: min(760px, calc(100vh - 24vh));
+  max-height: 760px;
+  min-height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  background: rgba(3, 11, 16, 0.97);
+}
+
+.terminal-shell .terminal {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100%;
+  min-height: 100%;
+  background: #263238 !important;
+  color: #eeffff !important;
+  font-family: SF Mono, Monaco, Menlo, Consolas, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 900px) {
+  .terminal-shell {
+    width: min(900px, calc(100vw - 16vw));
+    height: min(700px, calc(100vh - 20vh));
+    min-height: 360px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .terminal-shell {
+    width: calc(100vw - 10vw);
+    max-width: calc(100vw - 10vw);
+    min-width: 320px;
+    height: calc(100vh - 14vh);
+    min-height: 320px;
+    border-radius: 14px;
+  }
+
+  .terminal-shell .terminal {
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+  }
+}
+
+.terminal-shell .terminal-output {
+  color: #eeffff;
+}
+
+.terminal-shell .cmdline {
+  color: #80cbc4 !important;
+}
+
+.terminal-shell .terminal-output a {
+  color: #64b5f6;
+  text-decoration: underline;
+}
+
+.terminal-shell .terminal-output .success {
+  color: #c3e88d;
+}
+
+.terminal-shell .terminal-output .warning {
+  color: #ffb74d;
+}
+
+.terminal-shell .terminal-output .error {
+  color: #f07178;
+}

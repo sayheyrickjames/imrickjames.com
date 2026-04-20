@@ -1,0 +1,43 @@
+:root {
+  color-scheme: dark;
+  background-color: #263238;
+  color: #eeffff;
+  font-family: SF Mono, Monaco, Menlo, Consolas, monospace;
+}
+
+html,
+body,
+#__next {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #1e272c;
+  color: #eeffff;
+  min-height: 100vh;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12vh 12vw;
+  box-sizing: border-box;
+  background: radial-gradient(circle at top left, rgba(128, 203, 196, 0.1), transparent 30%),
+    linear-gradient(180deg, #1c262b 0%, #152028 100%);
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    padding: 10vh 8vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 8vh 5vw;
+  }
+}
