@@ -8,6 +8,26 @@ import {
 
 const validCommands = ['about', 'work', 'contact', 'resume', 'help'];
 
+type PreviewSection = {
+  heading: string;
+  content: string;
+  link?: string;
+};
+
+type PreviewData = {
+  title: string;
+  subtitle?: string;
+  sections: PreviewSection[];
+};
+
+type CommandResponse = {
+  status: 'success' | 'error';
+  output: string;
+  type: 'text' | 'preview' | 'adventure';
+  previewData?: PreviewData;
+  hint?: string;
+};
+
 function levenshtein(a: string, b: string) {
   const matrix = Array.from({ length: b.length + 1 }, () => new Array(a.length + 1).fill(0));
   for (let i = 0; i <= a.length; i += 1) matrix[0][i] = i;
@@ -43,6 +63,19 @@ function findClosestCommand(input: string) {
   return null;
 }
 
+const buildProjectPreview = (project: (typeof projects)[number]): PreviewData => ({
+  title: project.title,
+  subtitle: `${project.company} · ${project.year}`,
+  sections: [
+    { heading: 'One-liner', content: project.oneLiner },
+    { heading: 'Problem', content: project.problem },
+    { heading: 'Solution', content: project.solution },
+    { heading: 'Outcome', content: project.outcome },
+    { heading: 'Skills', content: project.skills },
+    project.link ? { heading: 'Link', content: 'Open externally', link: project.link } : { heading: 'Link', content: 'No link available' },
+  ],
+});
+
 const formatProject = (project: (typeof projects)[number]) => {
   return [
     `${project.title} (${project.year})`,
@@ -65,14 +98,39 @@ const getProjectList = () => {
     .join('\n');
 };
 
-type CommandResponse = { status: 'success' | 'error'; output: string };
+const handleAbout = async (): Promise<CommandResponse> => ({
+  status: 'success',
+  type: 'text',
+  output: aboutOutput,
+});
 
-const handleAbout = async (): Promise<CommandResponse> => ({ status: 'success', output: aboutOutput });
-const handleContact = async (): Promise<CommandResponse> => ({ status: 'success', output: contactOutput });
-const handleResume = async (): Promise<CommandResponse> => ({ status: 'success', output: resumeOutput });
+const handleContact = async (): Promise<CommandResponse> => ({
+  status: 'success',
+  type: 'text',
+  output: contactOutput,
+});
+
+const handleResume = async (): Promise<CommandResponse> => ({
+  status: 'success',
+  type: 'preview',
+  output: 'Opening resume preview...',
+  previewData: {
+    title: 'Resume',
+    subtitle: 'Your professional overview and resume link',
+    sections: [
+      {
+        heading: 'Resume',
+        content: resumeOutput.replace('RESUME\n\nYour resume is available here:\n  ', ''),
+        link: resumeOutput.match(/https?:\/\/\S+/)?.[0] || undefined,
+      },
+    ],
+  },
+});
+
 const handleHelp = async (): Promise<CommandResponse> => ({
   status: 'success',
-  output: `AVAILABLE COMMANDS\n\nhelp      — List available commands\nabout     — Your elevator pitch and skills\nwork      — List your flagship projects\n1-5       — Deep dive into a project\ncontact   — Show contact links\nresume    — Link to your resume\n\nTry typing a command, or use a project number directly.`,
+  type: 'text',
+  output: `AVAILABLE COMMANDS\n\nhelp      — List available commands\nabout     — Your elevator pitch and skills\nwork      — List your flagship projects\n1-5       — Deep dive into a project\ncontact   — Show contact links\nresume    — Open the resume preview\n\nTry typing a command, or use a project number directly.`,
 });
 
 const handleWork = async (args: string[]): Promise<CommandResponse> => {
@@ -80,17 +138,29 @@ const handleWork = async (args: string[]): Promise<CommandResponse> => {
   if (projectId && Number.isInteger(projectId) && projectId >= 1 && projectId <= projects.length) {
     const project = projects.find((item) => item.id === projectId);
     if (!project) {
-      return { status: 'error', output: `Project ${projectId} not found.` };
+      return { status: 'error', type: 'text', output: `Project ${projectId} not found.` };
     }
-    return { status: 'success', output: formatProject(project) };
+    return {
+      status: 'success',
+      type: 'preview',
+      output: `Opening ${project.title}...`,
+      previewData: buildProjectPreview(project),
+    };
   }
 
   const list = getProjectList();
   const output = `PROJECTS\n\n${list}\n\nType \`work 1\` through \`work 5\`, or just type the project number (for example: \`1\`).`;
-  return { status: 'success', output };
+  return {
+    status: 'success',
+    type: 'text',
+    output,
+    hint: 'Try `work 1` to open a project preview.',
+  };
 };
 
-const commandHandlers: Record<string, (args: string[]) => Promise<{ status: 'success' | 'error'; output: string }>> = {
+type CommandHandlers = Record<string, (args: string[]) => Promise<CommandResponse>>;
+
+const commandHandlers: CommandHandlers = {
   about: async () => handleAbout(),
   work: async (args: string[]) => handleWork(args),
   contact: async () => handleContact(),
@@ -126,17 +196,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (!commandHandlers[handlerName]) {
-    return res.status(200).json({ status: 'error', output: `Command not found: ${handlerName}. Type 'help' to see available commands.` });
+    return res.status(200).json({ status: 'error', type: 'text', output: `Command not found: ${handlerName}. Type 'help' to see available commands.` });
   }
 
   const result = await commandHandlers[handlerName](handlerArgs);
 
   if (handlerName === 'work' && handlerArgs.length === 0 && result.status === 'success') {
     result.output = `${result.output}\n\nTip: type \`work 1\` through \`work 5\` to explore a project in depth.`;
-  }
-
-  if (handlerName === 'work' && handlerArgs.length > 0 && result.status === 'success') {
-    result.output = `${result.output}\n\nTip: type \`work\` to review the full project list again.`;
   }
 
   if (suggestion && result.output) {
