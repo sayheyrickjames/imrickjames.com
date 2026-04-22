@@ -40,11 +40,13 @@
 
 ### 🔄 UPDATED ROADMAP (Locked Decisions)
 
-**Execution Path**: Sprint 1 (Quick Wins) → Skip Sprint 2 → Sprint 3 (Theme Controls, Incremental)
+**Execution Path**: Sprint 1 (Quick Wins) → Skip Sprint 2 → Sprint 3 (Theme Controls, Incremental) → Sprint 4 (Draggable Window + CYOA)
 
 **Mobile-First**: All features designed for mobile first, enhanced on desktop  
 **Three Khroma Themes**: Sapphire Blue, Warm Coral, Forest Green (see KHROMA_THEMES.md)  
-**Draggable Terminal**: Moved to backlog (not MVP priority)
+**Draggable Terminal**: Re-prioritized — Sprint 4 (was backlog). Min/max size constraints, mobile drag-friendly.  
+**Theme Customizer**: Inspired by Material Theme Builder (material-foundation.github.io/material-theme-builder) — bg, core colors, type, weights  
+**Controls Outside Terminal**: Done in Sprint 1D — toggle sits above shell, never overlaps content
 
 ---
 
@@ -96,7 +98,7 @@
 1. **3.1**: Control Bar Foundation — Move toggle outside terminal (2h)
 2. **3.2**: Three-Theme Segmented UI — Sapphire, Coral, Forest switcher (2.5h)
 3. **3.3**: Accessibility Audit — WCAG AA baseline (1.5h)
-4. **3.4**: Theme Customizer — Interactive color sliders (2.5h)
+4. **3.4**: Theme Customizer — Interactive color sliders, inspired by Material Theme Builder (bg, core colors, type, weights) (2.5h)
 5. **3.5**: Preset Gallery — Browse & apply themes (2h)
 6. **3.6**: Settings Panel — Centralized accessibility controls (2h)
 7. **3.7**: Mobile Polish — Touch-first optimization (1.5h)
@@ -108,10 +110,10 @@
 ## ⏮️ DEFERRED FEATURES (BACKLOG)
 
 ### Draggable/Resizable Terminal Window
-**Status**: Backlog (lower ROI)  
-**Why**: Theme controls & interactivity deliver more impact per hour  
-**When**: After Sprint 3 complete, if bandwidth allows  
-**Note**: Interesting for future enhancement; not blocking MVP
+**Status**: Sprint 4 (re-prioritized from backlog — confirmed by Rick)  
+**Why**: High delight factor; aligns with terminal window aesthetic  
+**Constraints**: Min size (readable), max size (viewport bounds), mobile drag via touch  
+**Reference**: Consider react-rnd or custom pointer events; always respect mobile touch
 
 ### Choose-Your-Own-Adventure Story
 **Status**: Backlog (requires story content from Rick)  

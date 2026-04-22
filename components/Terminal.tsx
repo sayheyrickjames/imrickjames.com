@@ -136,14 +136,15 @@ const Terminal = () => {
   }, [loaded]);
 
   return (
-    <div className="terminal-shell">
-      <div className="terminal-topbar">
+    <div className="terminal-wrapper">
+      <div className="terminal-controls">
         <ThemeToggle theme={theme} onToggle={setTheme} />
       </div>
 
-      <div ref={terminalRef} className="terminal-window" />
-
-      <PreviewModal open={previewOpen} onOpenChange={setPreviewOpen} previewData={previewData} />
+      <div className="terminal-shell">
+        <div ref={terminalRef} className="terminal-window" />
+        <PreviewModal open={previewOpen} onOpenChange={setPreviewOpen} previewData={previewData} />
+      </div>
     </div>
   );
 };
