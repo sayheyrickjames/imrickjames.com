@@ -4,6 +4,11 @@
 **MVP Target**: April 20, 2026 (8 days)  
 **Project**: Terminal Portfolio Site (imrickjames.com)
 
+**Current progress**:
+- Terminal portfolio is built, deployed, and visible on `imrickjames.com`
+- Radix preview modal and theme toggle are implemented
+- GitHub repo is connected and Vercel is receiving deploys
+
 ---
 
 ## Phase 0: Content & Strategy ✓ COMPLETE
@@ -32,7 +37,7 @@
 ## Phase 1: Foundation & Repo Setup
 **Duration**: April 13-14 (Days 2-3)  
 **Time Budget**: 6-8 hours  
-**Status**: Not started
+**Status**: Complete
 
 ### Tasks
 
@@ -71,7 +76,7 @@
 ## Phase 2: Terminal UI Foundation
 **Duration**: April 14-15 (Days 3-4)  
 **Time Budget**: 8-10 hours  
-**Status**: Not started
+**Status**: Complete
 
 ### Tasks
 
@@ -108,7 +113,7 @@
 ## Phase 3: Core Content Pages
 **Duration**: April 15-16 (Days 4-5)  
 **Time Budget**: 10-12 hours  
-**Status**: Not started
+**Status**: Complete
 
 ### Tasks
 
@@ -152,20 +157,20 @@
 ## Phase 4: Nested Exploration & Interactivity
 **Duration**: April 16-17 (Days 5-6)  
 **Time Budget**: 8-10 hours  
-**Status**: Not started
+**Status**: In progress
 
 ### Tasks
 
-- [ ] Enhance `/pages/api/commands/work.ts` to handle subcommand
+- [x] Enhance `/pages/api/commands/work.ts` to handle subcommand
   - `work 1` → show Project 1 deep-dive
   - `work 2` → show Project 2 deep-dive
   - Include: problem, solution, outcome, skills, link
-- [ ] Add command suggestions
+- [x] Add command suggestions
   - After `work` command: *"type `work 1` for details on Project 1..."*
 - [ ] Implement `ls` or `tree` command (easter egg)
   - Optional directory structure visualization
-- [ ] Add tab completion/autocomplete (jQuery Terminal feature)
-- [ ] Add command history (up/down arrows navigate history)
+- [x] Add tab completion/autocomplete (jQuery Terminal feature)
+- [x] Add command history (up/down arrows navigate history)
 - [ ] Test nested exploration
 
 ### Deliverable
@@ -186,14 +191,14 @@
 ## Phase 5: Polish & Extras
 **Duration**: April 17-18 (Days 6-7)  
 **Time Budget**: 6-8 hours  
-**Status**: Not started
+**Status**: Started
 
 ### Tasks
 
 - [ ] Add ASCII art banner on load
   - Your name + tagline + welcome message
 - [ ] Add visual dividers between outputs (for readability)
-- [ ] Implement dark/light theme toggle (optional)
+- [x] Implement dark/light theme toggle (optional)
   - `theme dark` / `theme light` command
 - [ ] Test mobile responsiveness thoroughly
 - [ ] Add SEO basics:
