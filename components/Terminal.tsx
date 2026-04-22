@@ -124,7 +124,6 @@ const Terminal = () => {
         name: 'rick-portfolio',
         height: '100%',
         width: '100%',
-        wrap: false,
         completion(command: string, callback: any) {
           const normalized = command.toLowerCase();
           const matches = completions.filter((item) => item.startsWith(normalized));

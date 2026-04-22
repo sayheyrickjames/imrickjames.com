@@ -218,14 +218,6 @@
   color: var(--text);
 }
 
-.terminal-shell .terminal-output > div,
-.terminal-shell .terminal-output > div > div {
-  white-space: pre-wrap !important;
-  overflow-wrap: break-word !important;
-  word-break: normal !important;
-  hyphens: none !important;
-}
-
 .terminal-shell .cmd-prompt span {
   color: var(--cmd) !important;
 }
