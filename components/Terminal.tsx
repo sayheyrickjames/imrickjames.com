@@ -59,10 +59,13 @@ type ApiResponse = {
 
 const Terminal = () => {
   const terminalRef = useRef<HTMLDivElement | null>(null);
+  const $termRef = useRef<any>(null);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [geoCity, setGeoCity] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -79,17 +82,47 @@ const Terminal = () => {
     }
   }, [theme]);
 
+  // 1B: Fetch geo on mount — silent fail, no UI impact
+  useEffect(() => {
+    fetch('/api/geo')
+      .then((r) => r.json())
+      .then(({ city }) => { if (city) setGeoCity(city); })
+      .catch(() => {});
+  }, []);
+
+  // 1B: Echo geo greeting once both terminal and geo data are ready
+  useEffect(() => {
+    if (geoCity && $termRef.current && loaded) {
+      $termRef.current.echo(`[[;;;geo-greeting]Hey there from ${geoCity}!]`);
+    }
+  }, [geoCity, loaded]);
+
+  // Cleanup idle timer on unmount
+  useEffect(() => {
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, []);
+
   useEffect(() => {
     if (!terminalRef.current || loaded) return;
 
     const $terminal = $(terminalRef.current) as any;
+    $termRef.current = $terminal;
+
+    const clearNudge = () => {
+      if (idleTimerRef.current) {
+        clearTimeout(idleTimerRef.current);
+        idleTimerRef.current = null;
+      }
+    };
 
     $terminal.terminal(
       async (input: string) => {
+        clearNudge();
+
         const trimmed = input.trim();
-        if (!trimmed) {
-          return;
-        }
+        if (!trimmed) return;
 
         if (trimmed === 'help') {
           return renderHelpOutput();
@@ -119,11 +152,13 @@ const Terminal = () => {
         return data.output || `Command returned no output.`;
       },
       {
-        greetings: 'Welcome to Rick James\' terminal portfolio. Type `help` to begin.',
+        greetings: "Welcome to Rick James' terminal portfolio. Type `help` to begin.",
         prompt: 'rick@portfolio:~$ ',
         name: 'rick-portfolio',
         height: '100%',
         width: '100%',
+        // 1A: Cancel nudge on first keypress
+        keydown: clearNudge,
         completion(command: string, callback: any) {
           const normalized = command.toLowerCase();
           const matches = completions.filter((item) => item.startsWith(normalized));
@@ -131,6 +166,13 @@ const Terminal = () => {
         },
       }
     );
+
+    // 1A: Nudge after 5s of inactivity — respects reduced motion (static text either way)
+    idleTimerRef.current = setTimeout(() => {
+      if ($termRef.current) {
+        $termRef.current.echo('[[;;;nudge]Not sure where to start? Try typing `help`.]');
+      }
+    }, 5000);
 
     setLoaded(true);
   }, [loaded]);

@@ -222,6 +222,14 @@
   color: var(--cmd) !important;
 }
 
+.terminal-shell .geo-greeting {
+  color: var(--cmd);
+}
+
+.terminal-shell .nudge {
+  color: var(--muted);
+}
+
 .terminal-shell .terminal-output a {
   color: var(--accent);
   text-decoration: underline;
