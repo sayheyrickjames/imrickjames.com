@@ -49,13 +49,14 @@
 
 @media (max-width: 640px) {
   .terminal-wrapper {
-    width: min(calc(100vw - 10vw), calc((100vh - 16vh - 50px) * 16 / 9));
+    width: min(calc(100vw - 10vw), calc((100vh - 16vh - 50px) * 4 / 5));
     max-width: calc(100vw - 10vw);
     min-width: 320px;
     gap: 8px;
   }
 
   .terminal-shell {
+    aspect-ratio: 4 / 5;
     border-radius: 14px;
   }
 
