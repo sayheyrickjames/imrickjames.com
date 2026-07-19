@@ -71,6 +71,22 @@ export default function PortfolioPage() {
 
           {!isUnlocked ? (
             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '0.85rem' }}>
+              <label
+                htmlFor="portfolio-password"
+                style={{
+                  position: 'absolute',
+                  width: '1px',
+                  height: '1px',
+                  padding: 0,
+                  margin: '-1px',
+                  overflow: 'hidden',
+                  clip: 'rect(0 0 0 0)',
+                  whiteSpace: 'nowrap',
+                  border: 0,
+                }}
+              >
+                Enter password
+              </label>
               <input
                 id="portfolio-password"
                 name="portfolio-password"
