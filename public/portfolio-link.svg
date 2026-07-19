@@ -7,8 +7,7 @@
       <stop offset="100%" stop-color="#38BDF8"/>
     </linearGradient>
   </defs>
-  <text x="80" y="170" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700">Portfolio</text>
-  <text x="80" y="250" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="36" letter-spacing="0.02em">imrickjames.com/portfolio</text>
-  <text x="80" y="330" fill="#38BDF8" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Password: 2026</text>
-  <text x="80" y="420" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="24">Click to open the password-protected portfolio page.</text>
+  <text x="80" y="210" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700">Portfolio</text>
+  <text x="80" y="300" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="36" letter-spacing="0.02em">imrickjames.com/portfolio</text>
+  <text x="80" y="390" fill="#38BDF8" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Password: 2026</text>
 </svg>
