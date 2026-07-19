@@ -66,14 +66,11 @@ export default function PortfolioPage() {
             Portfolio
           </h1>
           <p style={{ margin: '0 0 1.5rem', color: '#c7d0d6', lineHeight: 1.65 }}>
-            This page is password protected so you can share it with collaborators, clients, or recruiters without exposing the work publicly.
+            This page is password protected.
           </p>
 
           {!isUnlocked ? (
             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '0.85rem' }}>
-              <label htmlFor="portfolio-password" style={{ fontSize: '0.95rem', color: '#e6edf2' }}>
-                Enter password
-              </label>
               <input
                 id="portfolio-password"
                 name="portfolio-password"
