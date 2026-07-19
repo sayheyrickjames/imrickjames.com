@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="48" fill="#0F172A"/>
+  <rect x="20" y="20" width="1160" height="590" rx="40" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <defs>
+    <linearGradient id="buttonGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <text x="80" y="170" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700">Portfolio</text>
+  <text x="80" y="250" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="36" letter-spacing="0.02em">Rick James — password-protected portfolio</text>
+  <rect x="80" y="330" width="320" height="100" rx="28" fill="url(#buttonGradient)"/>
+  <text x="145" y="395" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">View portfolio</text>
+  <path d="M440 365L470 395L440 425" stroke="#38BDF8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="80" y="520" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="24">Click to open the password-protected portfolio page.</text>
+</svg>
