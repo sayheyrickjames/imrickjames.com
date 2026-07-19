@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { FormEvent, useMemo, useState } from 'react';
 
-const slideUrl = 'https://www.figma.com/slides/2RlQmR3W44aEPnpe8O0EEa';
-const defaultPassword = 'Enzo+Emilia';
+const slideUrl = 'https://www.figma.com/deck/2RlQmR3W44aEPnpe8O0EEa/Portfolio-Presentation--2026-?node-id=4001-4635&t=ZaOipKDE9AJUYTKj-1';
+const defaultPassword = '2026';
 
 export default function PortfolioPage() {
   const expectedPassword = useMemo(() => {
@@ -99,35 +99,26 @@ export default function PortfolioPage() {
               <button
                 type="submit"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   border: 'none',
                   borderRadius: '999px',
-                  padding: '0.9rem 1.25rem',
-                  background: 'linear-gradient(90deg, #64b5f6 0%, #80cbc4 100%)',
+                  padding: '0.95rem 1.2rem',
+                  background: '#64b5f6',
                   color: '#071018',
                   fontWeight: 700,
                   cursor: 'pointer',
                   width: 'fit-content',
+                  fontFamily: 'inherit',
+                  textDecoration: 'none',
                 }}
               >
-                Unlock portfolio
+                Unlock
               </button>
             </form>
           ) : (
             <div style={{ display: 'grid', gap: '1rem' }}>
-              <div
-                style={{
-                  border: '1px solid rgba(128, 203, 196, 0.24)',
-                  borderRadius: '16px',
-                  padding: '1rem 1.1rem',
-                  background: 'rgba(128, 203, 196, 0.08)',
-                }}
-              >
-                <p style={{ margin: 0, color: '#80cbc4', fontWeight: 700 }}>Access granted</p>
-                <p style={{ margin: '0.35rem 0 0', color: '#dbe7ee', lineHeight: 1.6 }}>
-                  You can now open the protected portfolio deck below.
-                </p>
-              </div>
-
               <a
                 href={slideUrl}
                 target="_blank"
@@ -145,7 +136,7 @@ export default function PortfolioPage() {
                   width: 'fit-content',
                 }}
               >
-                Open Figma Slides
+                Continue
               </a>
             </div>
           )}
