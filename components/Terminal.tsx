@@ -108,7 +108,6 @@ const Terminal = () => {
     if (!terminalRef.current || loaded) return;
 
     const $terminal = $(terminalRef.current) as any;
-    $termRef.current = $terminal;
 
     const clearNudge = () => {
       if (idleTimerRef.current) {
@@ -117,7 +116,8 @@ const Terminal = () => {
       }
     };
 
-    $terminal.terminal(
+    // .terminal() returns the terminal instance, which is what exposes echo()
+    $termRef.current = $terminal.terminal(
       async (input: string) => {
         clearNudge();
 
