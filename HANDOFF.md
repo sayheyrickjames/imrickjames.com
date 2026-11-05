@@ -1,79 +1,48 @@
-# Handoff: finish migrating imrickjames.com off Framer
+# imrickjames.com: how it's set up
 
-## Goal
-Rebuild the live Framer site (https://imrickjames.com) in this Next.js repo (pages router, Next 14.2.5) as a close visual and motion match, then host it on Vercel. Improvements are welcome. Framer must not be cancelled until the new site is live and verified.
+The Framer migration finished on 2026-11-04. imrickjames.com and terminal.imrickjames.com are both served by Vercel (project `portfolio`, team `imrickjames`) from `main` in this repo.
 
-## Status (updated 2026-11-04)
-- `npx tsc --noEmit` and `npm run build` pass. Nothing is committed or deployed.
-- Compared against the live site at 1440px and 390px. No horizontal overflow on any page at 390px.
-- Done this session: case study galleries and carousels, How page rebuilt to match the live sections, logo ticker, before/after slider, real Plaid logo, Framer removed from the About tools list, footer layout matched to live, mobile menu added, and a terminal `echo` bug fixed (see below).
-- Run with `npm run dev -- -p 3000`.
-- Screenshot tip: headless Chrome `--screenshot` does not scroll, so FadeUp sections below the fold look blank. Scroll through the page (for example over the DevTools protocol) before capturing.
+## Hosting and DNS
+- Domain registered at GoDaddy, with DNS on GoDaddy nameservers.
+  - `A @` → `216.198.79.1` (Vercel)
+  - `CNAME www` → Vercel. www 308-redirects to imrickjames.com.
+  - `CNAME terminal` → Vercel
+- Email is Google Workspace. Never change the MX records or the SPF TXT record.
+- Rollback: restore `A @` to Framer's `31.43.160.6` and `31.43.161.6`, and `CNAME www` to `sites.framer.app`. This only works while the Framer site is still published.
+- `next.config.js` rewrites `/` to `/terminal` when the host is terminal.imrickjames.com.
+- Supabase is not used by this repo.
 
-## Hosting facts
-- imrickjames.com is currently served by Framer. The domain is registered at GoDaddy.
-- Vercel (project `portfolio`) currently hosts only terminal.imrickjames.com, from this repo.
-- Supabase is not used anywhere in the repo.
-- `next.config.js` rewrites `/` to `/terminal` only when the host is terminal.imrickjames.com. Keep this working. `/portfolio` is a password page and is unchanged.
-
-## Structure
-- `lib/siteData.ts`: all content (5 case studies, skills, process, companies, terminal history, contact).
+## Code map
+- `lib/siteData.ts`: all site content (case studies, galleries, skills, process, contact).
+  - `[[phrase]]` in text renders as a highlight chip, via `ScrollReveal` or `rich()` in `components/Motion.tsx`.
 - `styles/site.css`: the design system.
-  - Dark and light themes via `html[data-site-theme]` CSS variables.
-  - Breakpoints at 1024px and 720px, and `prefers-reduced-motion` support.
-- `pages/_document.tsx`: sets the theme before first paint.
+  - Light theme by default, with dark as an option. Themes are set with `html[data-site-theme]` variables.
+  - Breakpoints at 1024px and 720px.
 - `components/`:
-  - `SiteLayout`: fixed pill nav, theme toggle, Lenis smooth scroll, footer.
-  - `Motion`: `ScrollReveal`, `FadeUp`, `Roll`.
-  - `CaseStudyCard`, `TerminalWidget`, `SkillsAccordion`, `LogoGrid`, `Icons`.
+  - `SiteLayout`: header, mobile menu, theme toggle, Lenis smooth scroll, footer.
+  - `Gallery`, `Marquee`, `BeforeAfter`, `CaseStudyCard`, `LogoGrid`, `TerminalWidget`, `SkillsAccordion`.
 - Pages:
   - `pages/index.tsx`
   - `pages/work/index.tsx`
-  - `pages/work/[slug].tsx` (parallax hero)
+  - `pages/work/[slug].tsx`
   - `pages/about.tsx`
   - `pages/contact.tsx`
   - `pages/how.tsx`
-- `pages/terminal.tsx`: the original terminal app, moved from `pages/index.tsx`. `globals.css`, `terminal.css` and `tokens.css` are global. Make sure site CSS does not leak into `/terminal`.
-- `content-brief.md`: original case study copy.
+- The terminal app: `pages/terminal.tsx` and `components/Terminal.tsx`.
+- `/portfolio` is the password page.
+- Case study images live in `public/images/cases/<framer-image-id>.png`.
 
-## Design tokens (from live Framer site)
-- Fonts: Manrope (weight 500) and JetBrains Mono for the terminal.
-- Dark theme: background `#0a0a0a`, text `#f5f5f5`.
-- Light theme: white background, black text. The footer is always black.
-- Muted greys: `#a3a3a3`, `#878787`, `#969696`.
-- Type scale:
-  - Hero h1: 64px / 1.2
-  - Section h1: 40px / 1.4
-  - Card title: 24px
-  - Nav: 18px
-  - Terminal: 13px
-- Layout:
-  - Side padding: 80px
-  - Content width: 1265px
-  - Case grid: 2 columns with a 40px gap, and the first card full width
-  - Card image radius: about 28px
-- Pill buttons are about 40px tall. The Contact pill inverts the theme.
-- Motion:
-  - Scroll-reveal headline words go grey to white.
-  - Rolling-text hover on nav and footer links.
-  - Fade-ups.
-  - Lenis smooth scroll.
+## Credits and licence
+The layout is based on Dawid Pietrasiak's free "Pearl" Framer template. Framer's Community Terms (Limited Commercial License, section 7.3.1) allow use and modification in your own projects, and they don't require attribution, so the site carries no visible credit. Two restrictions still apply:
+- Don't redistribute the design as a standalone template.
+- Don't describe the design as your own original work, for example in copy on `/how`.
 
-## Remaining TODO
-1. Owner review of the copy on `/how`. It was rewritten for the Next.js and Vercel stack because the live copy describes Framer. Check the "0 lines of code written by hand" tally and the tools list on `/about` (now Figma, Notion, Claude, GitHub Copilot).
-2. The before/after slider on `/how` uses two PayPal AI gallery images as placeholders. Swap in a real before/after pair when one exists. The component is `components/BeforeAfter.tsx`.
-3. GitHub URL confirmed from the git remote: https://github.com/sayheyrickjames.
-4. Spot-check the remaining pages (`/`, `/work`, `/about`, `/contact`) against the live site in light mode.
-5. Do not commit `.claude/`, `tsconfig.tsbuildinfo` or `public/portfolio-link.*`. Add the Co-authored-by trailer to commits.
+## Open items
+- Before/after slider on `/how`: it uses two PayPal gallery images as placeholders. Swap in a real pair when one exists.
+- Framer: the Basic site plan is cancelled and stays active until 2026-11-23. Until then, the rollback above still works. After that date the Framer site goes offline, and nothing else is needed.
 
-## Notes
-- Gallery and carousel image IDs live in `lib/siteData.ts` (`gallery`, `carousel`). The files are in `public/images/cases/<id>.png`. The row layout follows the live site: full, full, two-up, full, full.
-- `components/Terminal.tsx` stored the bare jQuery element in `$termRef` instead of the terminal instance. Because of that, the idle nudge and the geo greeting threw `echo is not a function`. This bug was already on terminal.imrickjames.com and is fixed here.
-
-## Cutover (after the owner approves a Vercel preview)
-1. Push a branch so Vercel builds a preview.
-2. In Vercel, go to Project → Domains and add imrickjames.com and www.
-3. In GoDaddy, update the DNS records to the values Vercel shows. Keep terminal.imrickjames.com as is.
-4. Verify with `curl -I https://imrickjames.com`. The `server: Framer` header should be gone.
-5. Only then cancel Framer, exporting any assets first.
-6. Check the Supabase dashboard. If no projects are in use, cancel it.
+## Working notes
+- Run locally with `npm run dev -- -p 3000`.
+- Headless Chrome `--screenshot` does not scroll, so FadeUp sections below the fold look blank. Scroll the page first.
+- Pushes must use the `sayheyrickjames` GitHub account.
+- Do not commit `.claude/` or `tsconfig.tsbuildinfo`. Both are gitignored.
