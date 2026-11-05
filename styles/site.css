@@ -192,7 +192,6 @@ html[data-site-theme='dark'] .logo-item img { filter: grayscale(1) invert(1); }
 .foot-cols .ext { display: flex; justify-content: space-between; align-items: center; }
 .foot-cols svg { width: 16px; height: 16px; }
 .site-footer .copyright { margin-top: 120px; color: #878787; font-size: 16px; }
-.site-footer .copyright a:hover { color: #fff; }
 
 /* Page heads */
 .page-head { padding-top: 80px; padding-bottom: 80px; }

@@ -33,11 +33,13 @@ The Framer migration finished on 2026-11-04. imrickjames.com and terminal.imrick
 - Case study images live in `public/images/cases/<framer-image-id>.png`.
 
 ## Credits and licence
-The layout is based on Dawid Pietrasiak's free "Pearl" Framer template. Framer's Community Terms (Limited Commercial License, section 7.3.1) allow use and modification in your own projects. They do not allow redistributing it as a standalone template or presenting it as original work. The footer credit (pietrasiak.pl) and the "Template" entry on `/how` should stay.
+The layout is based on Dawid Pietrasiak's free "Pearl" Framer template. Framer's Community Terms (Limited Commercial License, section 7.3.1) allow use and modification in your own projects, and they don't require attribution, so the site carries no visible credit. Two restrictions still apply:
+- Don't redistribute the design as a standalone template.
+- Don't describe the design as your own original work, for example in copy on `/how`.
 
 ## Open items
 - Before/after slider on `/how`: it uses two PayPal gallery images as placeholders. Swap in a real pair when one exists.
-- Framer: once the new site has been stable for a day, remove the domain from the Framer project, unpublish it and cancel the subscription.
+- Framer: the Basic site plan is cancelled and stays active until 2026-11-23. Until then, the rollback above still works. After that date the Framer site goes offline, and nothing else is needed.
 
 ## Working notes
 - Run locally with `npm run dev -- -p 3000`.

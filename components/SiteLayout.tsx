@@ -157,10 +157,7 @@ export default function SiteLayout({ title, description, children }: Props) {
             </div>
           </div>
           <p className="copyright">
-            © {new Date().getFullYear()} Rick James.{' '}
-            <a href="https://www.pietrasiak.pl/" target="_blank" rel="noreferrer" title="Layout based on the Pearl template by Pietrasiak">
-              All rights reserved.
-            </a>
+            © {new Date().getFullYear()} Rick James. All rights reserved.
           </p>
         </div>
       </footer>
