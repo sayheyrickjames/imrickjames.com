@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-const themeScript = `(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-site-theme',t)}catch(e){document.documentElement.setAttribute('data-site-theme','dark')}})();`;
+const themeScript = `(function(){try{var t=localStorage.getItem('site-theme');if(t!=='dark'&&t!=='light'){t='light'}document.documentElement.setAttribute('data-site-theme',t)}catch(e){document.documentElement.setAttribute('data-site-theme','light')}})();`;
 
 export default function Document() {
   return (

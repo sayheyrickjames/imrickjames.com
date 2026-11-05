@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import SiteLayout from '../components/SiteLayout';
 import LogoGrid from '../components/LogoGrid';
-import { FadeUp, ScrollReveal } from '../components/Motion';
+import { FadeUp, Hl, rich, ScrollReveal } from '../components/Motion';
 import { ArrowUpRight } from '../components/Icons';
 import { process as steps, skillGroups } from '../lib/siteData';
 
@@ -16,7 +16,7 @@ export default function About() {
           A decade of design systems work, built for an AI-first world.
         </h1>
         <div style={{ marginTop: 40, maxWidth: 800 }}>
-          <ScrollReveal as="h2" className="h-card" text="I’ve spent a decade shipping design for our favorite brands. Now I’m sharing what I learned, and why it still matters in an AI-first world." />
+          <ScrollReveal as="h2" className="h-card" text="I’ve spent a decade [[shipping design]] for our favorite brands. Now I’m sharing what I learned, and why it still matters in an [[AI-first world]]." />
         </div>
       </section>
 
@@ -72,7 +72,9 @@ export default function About() {
         <FadeUp className="row-split">
           <p className="eyebrow">Where I’ve Worked</p>
           <div>
-            <h2 className="h-section">Five companies, one throughline: design systems that scale, plus earlier years at Apple and Pinterest.</h2>
+            <h2 className="h-section">
+              Five companies, one throughline: <Hl>design systems</Hl> that scale, plus earlier years at Apple and Pinterest.
+            </h2>
             <ul style={{ marginTop: 32, display: 'grid', gap: 12, fontSize: 24 }}>
               <li>PayPal <span className="muted">AI-Ready Design System · Money Movement, 2024–Present</span></li>
               <li>Medium <span className="muted">Medium Design System, 2022–2023</span></li>
@@ -87,18 +89,25 @@ export default function About() {
           <p className="eyebrow">How I Work</p>
           <div>
             <h2 className="h-section" style={{ marginBottom: 40 }}>
-              A decade spent making design systems people actually want to use.
+              A decade spent making design systems people actually want to use: diagnosed, rebuilt, and proven with <Hl>real numbers</Hl>, every time.
             </h2>
             <div className="steps">
               {steps.map((s, i) => (
                 <div key={s.title}>
                   <p className="muted">{String(i + 1).padStart(2, '0')}</p>
                   <h3>{s.title}</h3>
-                  <p>{s.body}</p>
+                  <p>{rich(s.body)}</p>
                 </div>
               ))}
             </div>
-            <Link href="/work" className="pill lg" style={{ marginTop: 48 }}>
+          </div>
+        </FadeUp>
+
+        <FadeUp className="row-split">
+          <p className="eyebrow">Designing Success</p>
+          <div>
+            <h2 className="h-section">See how I’ve turned a decade of design systems work into case studies with real, measurable outcomes.</h2>
+            <Link href="/work" className="pill ghost story-link">
               Our Work <ArrowUpRight />
             </Link>
           </div>

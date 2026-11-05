@@ -123,7 +123,7 @@ export const skillGroups = [
 export const process = [
   { title: 'Diagnose', body: 'I start by mapping where a system breaks (for people, for tooling, or for scale) before touching a single component.' },
   { title: 'Architect', body: 'Token structures, naming systems, and component APIs get rebuilt with intent, not just polish.' },
-  { title: 'Ship with proof', body: 'Every system change ships with a measurable before/after: hours saved, friction removed, adoption gained.' },
+  { title: 'Ship with proof', body: 'Every system change ships with a [[measurable before/after]]: hours saved, friction removed, adoption gained.' },
   { title: 'Hand off the system', body: 'Documentation and a clear source-of-truth hierarchy outlive the initial build.' },
 ];
 

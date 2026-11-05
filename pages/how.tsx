@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import SiteLayout from '../components/SiteLayout';
-import { FadeUp } from '../components/Motion';
+import { FadeUp, Hl } from '../components/Motion';
 import Marquee from '../components/Marquee';
 import BeforeAfter from '../components/BeforeAfter';
 import { LogoMarquee } from '../components/LogoGrid';
@@ -9,13 +9,13 @@ import { ArrowUpRight } from '../components/Icons';
 import { caseStudies } from '../lib/siteData';
 
 const swatches = [
-  ['Black', '#f5f5f5'],
-  ['70', '#a3a3a3'],
-  ['50', '#878787'],
-  ['30', '#3f3f3f'],
-  ['20', '#222'],
-  ['5', '#111'],
-  ['White', '#0a0a0a'],
+  ['Black', '#000'],
+  ['70', '#4d4d4d'],
+  ['50', '#808080'],
+  ['30', '#b3b3b3'],
+  ['20', '#ccc'],
+  ['5', '#f2f2f2'],
+  ['White', '#fff'],
 ];
 
 const ingredients = [
@@ -67,7 +67,7 @@ export default function How() {
           <div>
             <h2 className="h-section">A deliberately small system</h2>
             <p style={{ margin: '24px 0' }} className="muted">
-              Typography: <span style={{ color: 'var(--s-fg)' }}>Manrope</span> across the entire site. One family, a few weights.
+              Typography: <Hl>Manrope</Hl> across the entire site. One family, a few weights.
             </p>
             <p style={{ margin: '24px 0' }} className="muted">
               Color: monochrome only, seven steps
@@ -158,7 +158,7 @@ export default function How() {
             <h2 className="h-section">Built with Claude Code</h2>
             <p className="muted" style={{ marginTop: 24, maxWidth: 820 }}>
               Claude handled the implementation: components, page wiring, copy edits, layout. I kept{' '}
-              <span style={{ color: 'var(--s-fg)' }}>concept, writing, taste, and the final call</span> on every pixel. This page is basically a
+              <Hl>concept, writing, taste, and the final call</Hl> on every pixel. This page is basically a
               byproduct of that collaboration.
             </p>
             <p style={{ marginTop: 40 }}>Questions about any of this?</p>

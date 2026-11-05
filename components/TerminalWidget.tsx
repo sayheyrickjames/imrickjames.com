@@ -34,6 +34,9 @@ export default function TerminalWidget() {
             </motion.pre>
           ))}
         </div>
+        <motion.pre variants={line}>
+          <span className="prompt">~</span> rickjames status
+        </motion.pre>
         <div>
           <motion.pre variants={line}>On branch main</motion.pre>
           <motion.pre variants={line}>Changes to be committed:</motion.pre>

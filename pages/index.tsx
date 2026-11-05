@@ -4,7 +4,7 @@ import CaseStudyCard from '../components/CaseStudyCard';
 import SkillsAccordion from '../components/SkillsAccordion';
 import LogoGrid from '../components/LogoGrid';
 import TerminalWidget from '../components/TerminalWidget';
-import { FadeUp, ScrollReveal } from '../components/Motion';
+import { ScrollReveal } from '../components/Motion';
 import { ArrowUpRight } from '../components/Icons';
 import { caseStudies } from '../lib/siteData';
 
@@ -18,20 +18,23 @@ export default function Home() {
       </section>
 
       <section className="wrap">
-        <div className="section-head">
-          <p className="eyebrow">Designing Success</p>
-          <ScrollReveal as="h2" className="h-section" text="See how I’ve turned a decade of systems work into case studies with real, measurable outcomes." />
-        </div>
         <div className="grid">
           {caseStudies.map((s, i) => (
             <CaseStudyCard key={s.slug} study={s} priority={i === 0} />
           ))}
         </div>
-        <FadeUp>
-          <Link href="/work" className="pill lg" style={{ marginTop: 64 }}>
-            My Work <ArrowUpRight />
-          </Link>
-        </FadeUp>
+      </section>
+
+      <section className="wrap section">
+        <div className="section-head" style={{ marginBottom: 0 }}>
+          <p className="eyebrow">Designing Success</p>
+          <div>
+            <ScrollReveal as="h2" className="h-section" text="See how I’ve turned a decade of systems work into case studies with real, measurable outcomes." />
+            <Link href="/work" className="pill ghost story-link">
+              My Work <ArrowUpRight />
+            </Link>
+          </div>
+        </div>
       </section>
 
       <section className="wrap section">

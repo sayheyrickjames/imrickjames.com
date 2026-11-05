@@ -24,7 +24,9 @@ export default function CaseStudyCard({ study, priority }: { study: CaseStudy; p
         </div>
         <div className="meta">
           <p className="eyebrow">{study.company}</p>
-          <h3 className="h-card">{study.title}</h3>
+          <h3 className="h-card">
+            {study.company} {study.title}
+          </h3>
         </div>
       </Link>
     </FadeUp>

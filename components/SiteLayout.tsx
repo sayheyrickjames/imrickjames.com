@@ -14,9 +14,9 @@ const mono = JetBrains_Mono({ subsets: ['latin'], display: 'swap', variable: '--
 type Props = { title?: string; description?: string; children: ReactNode };
 
 function ThemeSwitch() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   useEffect(() => {
-    setTheme((document.documentElement.getAttribute('data-site-theme') as 'light' | 'dark') ?? 'dark');
+    setTheme((document.documentElement.getAttribute('data-site-theme') as 'light' | 'dark') ?? 'light');
   }, []);
   const flip = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -156,7 +156,12 @@ export default function SiteLayout({ title, description, children }: Props) {
               </ul>
             </div>
           </div>
-          <p className="copyright">© {new Date().getFullYear()} Rick James. All rights reserved.</p>
+          <p className="copyright">
+            © {new Date().getFullYear()} Rick James.{' '}
+            <a href="https://www.pietrasiak.pl/" target="_blank" rel="noreferrer" title="Layout based on the Pearl template by Pietrasiak">
+              All rights reserved.
+            </a>
+          </p>
         </div>
       </footer>
     </div>
