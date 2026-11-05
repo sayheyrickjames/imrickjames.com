@@ -19,6 +19,7 @@ const swatches = [
 ];
 
 const ingredients = [
+  ['Template', 'Dawid Pietrasiak’s free ‘Pearl’ Framer template, as the starting point for layout and typography, rebuilt in code.'],
   ['Framework', 'Next.js and React, written in TypeScript. Every page is statically generated.'],
   ['Motion', 'Framer Motion for scroll reveals and parallax, Lenis for smooth scrolling, and plain CSS for the tickers and hover rolls.'],
   ['Components', 'A wordmark ticker, a floating pill navigation, and a drag-to-compare slider for before/after images, all built for this site.'],
@@ -29,7 +30,7 @@ const ingredients = [
 const numbers = [
   [String(caseStudies.length), 'Case studies'],
   ['1', 'Hosting provider'],
-  ['1', 'Typeface'],
+  ['1', 'Template remixed'],
   ['0', 'Lines of code written by hand'],
 ];
 
@@ -91,7 +92,7 @@ export default function How() {
           <div>
             <h2 className="h-section">What this is built from</h2>
             <p className="muted" style={{ margin: '16px 0 32px' }}>
-              Nothing here needs a page builder. Here’s exactly where each piece came from.
+              Nothing here is bespoke. Here’s exactly where each piece came from.
             </p>
             <ul className="data-list two" style={{ marginTop: 0 }}>
               {ingredients.map(([t, b]) => (
